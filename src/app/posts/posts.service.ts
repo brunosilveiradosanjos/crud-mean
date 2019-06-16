@@ -36,6 +36,12 @@ export class PostsService {
     getPostUpdateListener() {
         return this.postsUpdated.asObservable();
     }
+
+    getPost(id: string) {
+        // spread operator
+        return { ...this.posts.find(p => p.id === id) };
+    }
+
     addPost(title: string, content: string) {
         // tslint:disable-next-line: object-literal-shorthand
         const post: Post = { id: null, title: title, content: content };
