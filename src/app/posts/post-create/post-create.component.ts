@@ -31,15 +31,26 @@ export class PostCreateComponent implements OnInit {
         this.mode = 'create';
         this.postId = null;
       }
+      console.log('post-create.component ngOnInit() mode: ' + this.mode + ' postId: ' + this.postId);
     });
   }
 
-  onAddPost(form: NgForm) {
+  // onAddPost(form: NgForm) {
+  //   if (form.invalid) {
+  //     return;
+  //   }
+
+  onSavePost(form: NgForm) {
     if (form.invalid) {
       return;
     }
-
-    this.postsService.addPost(form.value.title, form.value.content);
+    if (this.mode === 'create') {
+      console.log('OnSavePost its a create : ' + form.value.title);
+      this.postsService.addPost(form.value.title, form.value.content);
+    } else {
+      console.log('OnSavePost its a update id: ' + this.postId + ' title: ' + form.value.title + ' content: ' + form.value.content);
+      this.postsService.updatePost(this.postId, form.value.title, form.value.content);
+    }
     form.resetForm();
   }
 }

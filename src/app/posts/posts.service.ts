@@ -38,6 +38,7 @@ export class PostsService {
     }
 
     getPost(id: string) {
+        console.log('posts.service getPost id:' + id);
         // spread operator
         return { ...this.posts.find(p => p.id === id) };
     }
@@ -55,13 +56,22 @@ export class PostsService {
             });
     }
 
+    updatePost(id: string, title: string, content: string) {
+        // tslint:disable-next-line: object-literal-shorthand
+        const post: Post = { id: id, title: title, content: content };
+        this.http
+            .put('http://localhost:3000/api/posts/' + id, post)
+            .subscribe(response => console.log(response));
+        console.log('posts.service updatePost id:' + post.id + ' title: ' + post.title + ' content: ' + post.content);
+    }
+
     deletePost(postId: string) {
         this.http.delete('http://localhost:3000/api/posts/' + postId)
             .subscribe(() => {
                 const updatedPosts = this.posts.filter(post => post.id !== postId);
                 this.posts = updatedPosts;
                 this.postsUpdated.next([...this.posts]);
-                console.log('Deleted');
+                console.log('Deleted: http://localhost:3000/api/posts/' + postId);
             });
     }
 }
