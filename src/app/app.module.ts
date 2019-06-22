@@ -8,6 +8,7 @@ import {
   , MatButtonModule
   , MatToolbarModule
   , MatExpansionModule
+  , MatProgressSpinnerModule
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -35,6 +36,7 @@ import { AppRountingModule } from './posts/app-rounting.module';
     MatButtonModule,
     MatToolbarModule,
     MatExpansionModule,
+    MatProgressSpinnerModule,
     HttpClientModule
   ],
   providers: [PostsService],
